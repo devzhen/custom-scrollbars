@@ -1,6 +1,7 @@
 (function () {
 
     this.CustomScrollbar = function (HTMLElement) {
+
         /*Проверка*/
         try {
 
@@ -34,36 +35,162 @@
         }
 
 
-        /**
-         * Содать пользовательскую вертикальную полосу прокрутки
-         */
-        CustomScrollbar.prototype.createYScrollbar = function () {
+        return {
 
-            cs.createYScrollbar();
-        };
+            /**
+             * Содать пользовательскую вертикальную полосу прокрутки
+             */
+            createYScrollbar: function () {
 
-        /**
-         * Удалить пользовательскую вертикальную полосу прокрутки
-         */
-        CustomScrollbar.prototype.removeYScrollbar = function () {
+                cs.createYScrollbar();
+            },
 
-            cs.removeYScrollbar();
-        };
+            /**
+             * Удалить пользовательскую вертикальную полосу прокрутки
+             */
+            removeYScrollbar: function () {
 
-        /**
-         * Содать пользовательскую горизонтальную полосу прокрутки
-         */
-        CustomScrollbar.prototype.createXScrollbar = function () {
+                cs.removeYScrollbar();
+            },
 
-            cs.createXScrollbar();
-        };
+            /**
+             * Содать пользовательскую горизонтальную полосу прокрутки
+             */
+            createXScrollbar: function () {
 
-        /**
-         * Удалить пользовательскую горизонтальную полосу прокрутки
-         */
-        CustomScrollbar.prototype.removeXScrollbar = function () {
+                cs.createXScrollbar();
+            },
 
-            cs.removeXScrollbar();
+            /**
+             * Удалить пользовательскую горизонтальную полосу прокрутки
+             */
+            removeXScrollbar: function () {
+
+                cs.removeXScrollbar();
+            },
+
+            /**
+             * Добавить CSS класс для вертикального ползунка.
+             * @param className string. Название CSS класса.
+             */
+            setCssClassForVerticalSlider: function (className) {
+
+                /*Проверка*/
+                if (!className || typeof className !== "string" || !cs.ySlider) {
+                    return;
+                }
+
+                /*Добавить CSS класс для ползунка*/
+                cs.ySlider.divSlider.classList.add(className);
+            },
+
+            /**
+             * Удалить CSS класс для вертикального ползунка.
+             * @param className string. Название CSS класса.
+             */
+            removeCssClassForVerticalSlider: function (className) {
+
+                /*Проверка*/
+                if (!className || typeof className !== "string" || !cs.ySlider) {
+                    return;
+                }
+
+                /*Удалить CSS класс для ползунка*/
+                if (cs.ySlider.divSlider.classList.contains(className)) {
+                    cs.ySlider.divSlider.classList.remove(className)
+                }
+            },
+
+            /**
+             * Добавить CSS класс для горизонтального ползунка.
+             * @param className string. Название CSS класса.
+             */
+            setCssClassForHorizontalSlider: function (className) {
+
+                /*Проверка*/
+                if (!className || typeof className !== "string" || !cs.xSlider) {
+                    return;
+                }
+
+                /*Добавить CSS класс для ползунка*/
+                cs.ySlider.divSlider.classList.add(className);
+            },
+
+            /**
+             * Удалить CSS класс для горизонтального ползунка.
+             * @param className string. Название CSS класса.
+             */
+            removeCssClassForHorizontalSlider: function (className) {
+
+                /*Проверка*/
+                if (!className || typeof className !== "string" || !cs.xSlider) {
+                    return;
+                }
+
+                /*Удалить CSS класс для ползунка*/
+                if (cs.xSlider.divSlider.classList.contains(className)) {
+                    cs.xSlider.divSlider.classList.remove(className)
+                }
+            },
+
+            /**
+             * Добавить атрибут id для вертикального ползунка.
+             * @param id string. Имя атрибута id.
+             */
+            setIdForVerticalSlider: function (id) {
+
+                /*Проверка*/
+                if (!id || typeof id !== "string" || !cs.ySlider) {
+                    return;
+                }
+
+                /*Добавить атрибут id для вертикального ползунка*/
+                cs.ySlider.divSlider.id = id;
+
+            },
+
+            /**
+             * Удалить атрибут id для вертикального ползунка.
+             */
+            removeIdForVerticalSlider: function () {
+
+                /*Проверка*/
+                if (!cs.ySlider || !cs.ySlider.divSlider.getAttribute('id')) {
+                    return;
+                }
+
+                /*Удалить атрибут id для вертикального ползунка*/
+                cs.ySlider.divSlider.removeAttribute('id');
+            },
+
+            /**
+             * Добавить атрибут id для горизонтального ползунка.
+             * @param id string. Имя атрибута id.
+             */
+            setIdForHorizontalSlider: function (id) {
+
+                /*Проверка*/
+                if (!id || typeof id !== "string" || !cs.xSlider) {
+                    return;
+                }
+
+                /*Добавить атрибут id для горизонтального ползунка*/
+                cs.xSlider.divSlider.id = id;
+            },
+
+            /**
+             * Удалить атрибут id для горизонтального ползунка.
+             */
+            removeIdForHorizontalSlider: function () {
+
+                /*Проверка*/
+                if (!cs.xSlider || !cs.xSlider.divSlider.getAttribute('id')) {
+                    return;
+                }
+
+                /*Удалить атрибут id для вертикального ползунка*/
+                cs.xSlider.divSlider.removeAttribute('id');
+            },
         };
     };
 
