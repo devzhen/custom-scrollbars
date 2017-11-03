@@ -3,7 +3,7 @@ function CustomScrollbar(HTMLElement) {
     /*Проверка*/
     try {
 
-        if (!HTMLElement || !document.contains(HTMLElement)) {
+        if (!HTMLElement || !document.body.contains(HTMLElement)) {
             return;
         }
 

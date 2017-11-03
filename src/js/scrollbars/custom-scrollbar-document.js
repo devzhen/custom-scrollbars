@@ -7,6 +7,16 @@ function CustomScrollbarDocument() {
     /*Запретить прокрутку*/
     this.disableOverflow();
 
+    /*Генерация события resize - это нужно, чтобы все custom scrollbars перерисовали своё положение*/
+    try {
+        this.triggerResizeEvent();
+
+    } catch (e) {
+
+        this.enableOverflow();
+        return;
+    }
+
     /*Высота страницы с учетом прокрутки*/
     var scrollHeight = Math.max(
         document.body.scrollHeight, document.documentElement.scrollHeight,
@@ -69,6 +79,17 @@ CustomScrollbarDocument.prototype.disableOverflow = function () {
     /*Запретить прокрутку элемента*/
     document.body.classList.add('disable-y-overflow');
     document.body.classList.add('disable-x-overflow');
+};
+
+
+/**
+ * Разрешить прокрутку страницы
+ */
+CustomScrollbarDocument.prototype.enableOverflow = function () {
+
+    /*Запретить прокрутку элемента*/
+    document.body.classList.remove('disable-y-overflow');
+    document.body.classList.remove('disable-x-overflow');
 };
 
 
@@ -215,6 +236,39 @@ CustomScrollbarDocument.prototype.detachResizeHandler = function () {
 
 };
 
+
+/**
+ * Генерация resize события. Метод нужен чтобы все полосы прокрутки перерисовали свое положение
+ */
+CustomScrollbarDocument.prototype.triggerResizeEvent = function () {
+
+    try {
+
+        var event = new Event("resize", {bubbles: true, cancelable: true});
+
+        document.dispatchEvent(event);
+
+    } catch (e) {
+
+        /*IE9+*/
+        if (document.createEvent) {
+
+            event = document.createEvent("Event");
+
+            event.initEvent("resize", true, true);
+
+            document.dispatchEvent(event);
+
+        } else if (document.createEventObject) {/*IE8-*/
+
+            event = document.createEventObject();
+
+            document.fireEvent("onresize", event)
+        }
+
+    }
+
+};
 
 /**
  * Прикрепить обработчик wheel события

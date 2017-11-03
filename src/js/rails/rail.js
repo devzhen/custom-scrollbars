@@ -25,6 +25,8 @@ Rail.prototype.create = function () {
 
     /*Назначить обработчик click события для направляющей для ползунка*/
     this.divRail.addEventListener('click', clickHandler);
+
+    this.attachResizeHandler();
 };
 
 
@@ -48,6 +50,13 @@ Rail.prototype.remove = function () {
 };
 
 
+Rail.prototype.attachResizeHandler = function () {
+
+    window.addEventListener('resize', function () {
+        console.log('resize');
+    });
+};
+
 /**
  * Вернуть =iv-направляющую
  * @return {HTMLElement}
@@ -67,6 +76,11 @@ Rail.prototype.getWidth = function () {
     return this.divRail.offsetWidth;
 };
 
+
+/**
+ * Обработчик click события
+ * @param event
+ */
 function clickHandler(event) {
     event.preventDefault();
 }
