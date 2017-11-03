@@ -73,7 +73,7 @@ CustomScrollbarElement.prototype.createWrapper = function () {
 
     /*Окружить элемент div-оберткой*/
     this.wrapper = document.createElement('div');
-    this.element.parentElement.appendChild(this.wrapper);
+    this.element.parentElement.insertBefore(this.wrapper, this.element);
     this.wrapper.classList.add('custom-wrapper');
     this.wrapper.appendChild(this.element);
 
