@@ -73,20 +73,11 @@ CustomScrollbarElement.prototype.createWrapper = function () {
 
     /*Окружить элемент div-оберткой*/
     this.wrapper = document.createElement('div');
-    this.element.parentElement.insertBefore(this.wrapper, this.element);
+    this.element.parentElement.appendChild(this.wrapper);
     this.wrapper.classList.add('custom-wrapper');
     this.wrapper.appendChild(this.element);
-
-    /*Установить ширину и высоту для обёртки*/
     this.wrapper.style.height = this.element.offsetHeight + 'px';
     this.wrapper.style.width = this.element.offsetWidth + 'px';
-
-    /*Установить CSS св-во display для обёртки*/
-    var display = getComputedStyle(this.element).display;
-    if (display) {
-        this.wrapper.style.display = display;
-    }
-
 };
 
 

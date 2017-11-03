@@ -3,7 +3,7 @@ function CustomScrollbar(HTMLElement) {
     /*Проверка*/
     try {
 
-        if (!HTMLElement || !document.body.contains(HTMLElement)) {
+        if (!HTMLElement || !document.contains(HTMLElement)) {
             return;
         }
 
@@ -28,14 +28,6 @@ function CustomScrollbar(HTMLElement) {
         var cs = new CustomScrollbarDocument();
 
     } else { /*Если пользовательские полосы прокрутки назначаются для html-элемента*/
-
-        /*Если функция уже вызвана для html-элемента*/
-        if (HTMLElement.classList.contains('dg-custom-scrollbars')) {
-            return;
-        }
-
-        /*Поставить маркер. что для html-элемента назначены пользовательские полосы прокрутки*/
-        HTMLElement.classList.add('dg-custom-scrollbars');
 
         cs = new CustomScrollbarElement(HTMLElement);
     }
