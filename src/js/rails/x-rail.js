@@ -11,15 +11,30 @@ function xRail() {
     Rail.apply(this, arguments);
 
     /*Если направляющая ползунка создается для всего документа*/
-    if (this.parent === document ||
-        this.parent === document.documentElement ||
-        this.parent === document.body) {
+    if (this.element === document ||
+        this.element === document.documentElement ||
+        this.element === document.body) {
 
         this.divRail.classList.add('custom-x-rail-document');
 
     } else {
 
         this.divRail.classList.add('custom-x-rail');
+
+        /*Определение обработчика resize события*/
+        this.resizeHandler = function () {
+
+            this.divRail.style.top = this.getCoords(this.element).bottom - this.divRail.offsetHeight + 'px';
+            this.divRail.style.left = this.getCoords(this.element).left + 'px';
+            this.divRail.style.width = this.element.offsetWidth + 'px';
+
+        }.bind(this);
+
+        /*Вызов обработчика resize события*/
+        this.resizeHandler();
+
+        /*Прикрепить обработчик resize события*/
+        this.attachResizeHandler();
     }
 
 }
@@ -38,7 +53,7 @@ xRail.prototype.correctWidth = function (value) {
 
     if (typeof value === 'number') {
 
-        this.divRail.style.width = '100%';
+        this.divRail.style.width = this.element.offsetWidth;
         this.divRail.style.width = this.divRail.offsetWidth - value + 'px';
     }
 };

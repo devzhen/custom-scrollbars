@@ -13,12 +13,6 @@ function CustomScrollbarElement(htmlElement) {
     /*Запретить прокрутку элемента*/
     this.disableOverflow();
 
-    /*Окружить элемент div-оберткой*/
-    this.createWrapper();
-
-    /*Прикрепить обработчик resize события*/
-    this.attachResizeHandler();
-
     /*Пользовательская вертикальная полоса прокрутки*/
     if (this.element.scrollHeight > this.element.clientHeight) {
         this.createYScrollbar();
@@ -42,6 +36,9 @@ function CustomScrollbarElement(htmlElement) {
 
     /*Проверять, что html-элемент существует*/
     this.attachIsElementExistsHandler();
+
+    /*Прикрепить обработчик resize события*/
+    this.attachResizeHandler();
 }
 
 /**
@@ -67,33 +64,6 @@ CustomScrollbarElement.prototype.disableOverflow = function () {
 
 
 /**
- * Создать div-обёртку вокруг элемента
- */
-CustomScrollbarElement.prototype.createWrapper = function () {
-
-    /*Окружить элемент div-оберткой*/
-    this.wrapper = document.createElement('div');
-    this.element.parentElement.appendChild(this.wrapper);
-    this.wrapper.classList.add('custom-wrapper');
-    this.wrapper.appendChild(this.element);
-    this.wrapper.style.height = this.element.offsetHeight + 'px';
-    this.wrapper.style.width = this.element.offsetWidth + 'px';
-};
-
-
-/**
- * Удалить div-обёртку вокруг элемента
- */
-CustomScrollbarElement.prototype.removeWrapper = function () {
-
-    /*Удалить элемент div-обертку*/
-    this.wrapper.parentElement.removeChild(this.wrapper);
-
-    this.wrapper = null;
-};
-
-
-/**
  * Создать пользовательскую вертикальную полосу прокрутки
  */
 CustomScrollbarElement.prototype.createYScrollbar = function () {
@@ -102,7 +72,7 @@ CustomScrollbarElement.prototype.createYScrollbar = function () {
         return;
     }
 
-    this.yRail = new yRail(this.wrapper);
+    this.yRail = new yRail(this.element);
 
     this.ySlider = new ySlider(this.yRail.getDivRail());
     this.ySlider.setTopPositionByElementsScrollTop(this.element);
@@ -152,7 +122,7 @@ CustomScrollbarElement.prototype.createXScrollbar = function () {
         return;
     }
 
-    this.xRail = new xRail(this.wrapper);
+    this.xRail = new xRail(this.element);
 
     if (this.yRail) {
 
@@ -186,38 +156,6 @@ CustomScrollbarElement.prototype.removeXScrollbar = function () {
 
     this.xRail.remove();
     this.xRail = null;
-};
-
-
-/**
- * Прикрепить обработчик resize события
- */
-CustomScrollbarElement.prototype.attachResizeHandler = function () {
-
-    var self = this;
-
-    self.resizeHandler = function () {
-
-        /*Подкорректировать размеры div-обертки*/
-        self.wrapper.style.height = self.element.offsetHeight + 'px';
-        self.wrapper.style.width = self.element.offsetWidth + 'px';
-    };
-
-    window.addEventListener('resize', self.resizeHandler);
-};
-
-
-/**
- * Открепить обработчик resize события
- */
-CustomScrollbarElement.prototype.detachResizeHandler = function () {
-
-    if (this.resizeHandler) {
-
-        window.removeEventListener('resize', this.resizeHandler);
-
-        this.resizeHandler = null;
-    }
 };
 
 
@@ -290,9 +228,41 @@ CustomScrollbarElement.prototype.detachInputHandler = function () {
 
     if (this.inputHandler) {
 
-        this.element.addEventListener('input', this.inputHandler);
+        this.element.removeEventListener('input', this.inputHandler);
 
         this.inputHandler = null;
+    }
+};
+
+
+/**
+ * Прикрепить обработчик resize события
+ */
+CustomScrollbarElement.prototype.attachResizeHandler = function () {
+
+    this.resizeHandler = function () {
+
+        /*Если есть и гориз., и вертик. полосы прокрутки - поддкорректировать ширину горизонтальной*/
+        if (this.yRail && this.xRail && this.xRail.getWidth() === this.element.offsetWidth) {
+            this.xRail.correctWidth(this.yRail.getWidth());
+        }
+
+    }.bind(this);
+
+    window.addEventListener('resize', this.resizeHandler);
+};
+
+
+/**
+ * Открепить обработчик resize события
+ */
+CustomScrollbarElement.prototype.detachResizeHandler = function () {
+
+    if (this.resizeHandler) {
+
+        window.removeEventListener('resize', this.resizeHandler);
+
+        this.resizeHandler = null;
     }
 };
 
@@ -361,9 +331,9 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
     function stopPropagation(e) {
 
         /*e.originalEvent прийшлось сделать чтобы работало в IE
-        if (e.originalEvent) {
-            e = e.originalEvent
-        }*/
+         if (e.originalEvent) {
+         e = e.originalEvent
+         }*/
 
         if (e.stopPropagation) {
             e.stopPropagation();
@@ -420,9 +390,9 @@ CustomScrollbarElement.prototype.attachIsElementExistsHandler = function () {
             self.detachResizeHandler();
             self.detachScrollHandler();
             self.detachInputHandler();
+            self.detachResizeHandler();
             self.removeYScrollbar();
             self.removeXScrollbar();
-            self.removeWrapper();
             clearInterval(self.intervalId);
             self.intervalId = null;
             self.element = null;

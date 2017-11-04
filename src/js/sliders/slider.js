@@ -38,7 +38,7 @@ Slider.prototype.remove = function () {
 
 
 /**
- * Получени координат элемента относительно страницы.
+ * Получение координат элемента относительно страницы.
  * @param HTMLElement
  * @return {{top: number, left: number}}
  */

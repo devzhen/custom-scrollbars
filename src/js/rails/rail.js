@@ -1,15 +1,15 @@
 /**
  * Направляющая для ползунка прокрутки
- * @param railParent HTMLElement. Родительский элемент для направляющей
+ * @param htmlElement HTMLElement. Родительский элемент для направляющей
  * @constructor
  */
-function Rail(railParent) {
+function Rail(htmlElement) {
 
-    if (!railParent) {
+    if (!htmlElement) {
         return;
     }
 
-    this.parent = railParent;
+    this.element = htmlElement;
 
     this.create();
 }
@@ -21,12 +21,10 @@ Rail.prototype.create = function () {
 
     /*Создание div - направляющая для ползунка*/
     this.divRail = document.createElement('div');
-    this.parent.appendChild(this.divRail);
+    document.body.appendChild(this.divRail);
 
     /*Назначить обработчик click события для направляющей для ползунка*/
     this.divRail.addEventListener('click', clickHandler);
-
-    this.attachResizeHandler();
 };
 
 
@@ -40,22 +38,37 @@ Rail.prototype.remove = function () {
     }
 
     /*Удаление div - направляющая для ползунка*/
-    this.parent.removeChild(this.divRail);
+    document.body.removeChild(this.divRail);
 
     /*Удалить обработчик click события для направляющей для ползунка*/
     this.divRail.removeEventListener('click', clickHandler);
 
+    /*Открепить обработчик resize события*/
+    this.detachResizeHandler();
+
     this.divRail = null;
-    this.parent = null;
+    this.element = null;
 };
 
 
+/**
+ * Прикрепить обработчик resize события
+ */
 Rail.prototype.attachResizeHandler = function () {
 
-    window.addEventListener('resize', function () {
-        console.log('resize');
-    });
+    window.addEventListener('resize', this.resizeHandler);
 };
+
+
+/**
+ * Открепить обработчик resize события
+ */
+Rail.prototype.detachResizeHandler = function () {
+
+    window.removeEventListener('resize', this.resizeHandler);
+    this.resizeHandler = null;
+};
+
 
 /**
  * Вернуть =iv-направляющую
@@ -74,6 +87,36 @@ Rail.prototype.getDivRail = function () {
 Rail.prototype.getWidth = function () {
 
     return this.divRail.offsetWidth;
+};
+
+
+/**
+ * Получение координат элемента относительно страницы.
+ * @param HTMLElement
+ * @return {{top: number, left: number, right: number, bottom: number}}
+ */
+Rail.prototype.getCoords = function (HTMLElement) {
+
+    var box = HTMLElement.getBoundingClientRect();
+
+    var body = document.body;
+    var docEl = document.documentElement;
+
+    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+    var clientTop = docEl.clientTop || body.clientTop || 0;
+    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+    var top = box.top + scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+
+    return {
+        top: top,
+        left: left,
+        right: left + HTMLElement.offsetWidth,
+        bottom: top + HTMLElement.offsetHeight
+    };
 };
 
 

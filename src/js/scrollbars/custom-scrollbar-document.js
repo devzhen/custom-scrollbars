@@ -270,6 +270,7 @@ CustomScrollbarDocument.prototype.triggerResizeEvent = function () {
 
 };
 
+
 /**
  * Прикрепить обработчик wheel события
  */
