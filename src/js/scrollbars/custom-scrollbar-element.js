@@ -244,7 +244,13 @@ CustomScrollbarElement.prototype.attachResizeHandler = function () {
 
         /*Если есть и гориз., и вертик. полосы прокрутки - поддкорректировать ширину горизонтальной*/
         if (this.yRail && this.xRail && this.xRail.getWidth() === this.element.offsetWidth) {
+
             this.xRail.correctWidth(this.yRail.getWidth());
+
+            /*Подкорректировать позицию горизонтального ползунка*/
+            if (this.xSlider) {
+                this.xSlider.setLeftPositionByElementsScrollLeft(this.element);
+            }
         }
 
     }.bind(this);
@@ -299,7 +305,7 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
         if (this.ySlider) {
             this.element.scrollTop = this.element.scrollTop + delta;
             stopPropagation(e);
-            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
         }
 
         /*Если не уществует вертикальная прокрутка, но есть горизонтальная прокрутка*/
@@ -307,7 +313,7 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
 
             this.element.scrollLeft = this.element.scrollLeft + delta;
             stopPropagation(e);
-            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
         }
     }.bind(this);
 

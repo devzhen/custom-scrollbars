@@ -77,8 +77,11 @@ CustomScrollbarDocument.IS_SOMEBODY_SCROLLED_NOW = false;
 CustomScrollbarDocument.prototype.disableOverflow = function () {
 
     /*Запретить прокрутку элемента*/
-    document.body.classList.add('disable-y-overflow');
-    document.body.classList.add('disable-x-overflow');
+    // document.body.classList.add('disable-y-overflow');
+    // document.body.classList.add('disable-x-overflow');
+
+    /*Запретить прокрутку элемента*/
+    document.documentElement.classList.add('disable-overflow');
 };
 
 

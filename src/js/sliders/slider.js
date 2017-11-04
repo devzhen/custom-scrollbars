@@ -34,6 +34,8 @@ Slider.prototype.remove = function () {
     this.resizeHandler = null;
 
     this.divSlider = null;
+
+    this.parent = null;
 };
 
 

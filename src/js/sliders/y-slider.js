@@ -52,12 +52,12 @@ ySlider.prototype.setTopPositionByElementsScrollTop = function (HTMLElement) {
     }
 
     /*Определение ширины ползунка динамически, исходя из полной высоты элемента*/
-    var parts = scrollHeight / this.parent.clientHeight;
-    var sliderHeight = this.parent.clientHeight / parts;
+    var parts = scrollHeight / this.divSlider.parentElement.clientHeight;
+    var sliderHeight = this.divSlider.parentElement.clientHeight / parts;
     this.divSlider.style.height = sliderHeight + 'px';
 
     /*Масштаб по оси Y*/
-    var scaleY = this.parent.clientHeight / scrollHeight;
+    var scaleY = this.divSlider.parentElement.clientHeight / scrollHeight;
 
     /*Вычисление значения top для ползунка*/
     this.divSlider.style.top = scrollTop * scaleY + 'px';
@@ -121,7 +121,7 @@ ySlider.prototype.attachMouseDownHandler = function (HTMLElement) {
         }
 
         /*Масштаб по оси Y*/
-        var scaleY = self.parent.clientHeight / scrollHeight;
+        var scaleY = self.divSlider.parentElement.clientHeight / scrollHeight;
 
         /*Запретить выделение текста*/
         document.body.classList.add('disable-select');
@@ -142,9 +142,9 @@ ySlider.prototype.attachMouseDownHandler = function (HTMLElement) {
             }
 
             /*Проверить нижнюю позицию вертикального ползунка без наличия ползунка горизонтальной прокрутки*/
-            if (self.divSlider.offsetTop >= self.parent.clientHeight - self.divSlider.offsetHeight) {
+            if (self.divSlider.offsetTop >= self.divSlider.parentElement.clientHeight - self.divSlider.offsetHeight) {
 
-                self.divSlider.style.top = self.parent.clientHeight - self.divSlider.offsetHeight + 'px';
+                self.divSlider.style.top = self.divSlider.parentElement.clientHeight - self.divSlider.offsetHeight + 'px';
             }
 
             /*Прокрутить страницу или элемент*/

@@ -53,12 +53,12 @@ xSlider.prototype.setLeftPositionByElementsScrollLeft = function (HTMLElement) {
     }
 
     /*Определение высоты ползунка динамически, исходя из полной ширины элемента*/
-    var parts = scrollWidth / this.parent.clientWidth;
-    var sliderWidth = this.parent.clientWidth / parts;
+    var parts = scrollWidth / this.divSlider.parentElement.clientWidth;
+    var sliderWidth = this.divSlider.parentElement.clientWidth / parts;
     this.divSlider.style.width = sliderWidth + 'px';
 
     /*Масштаб по оси X*/
-    var scaleX = this.parent.clientWidth / scrollWidth;
+    var scaleX = this.divSlider.parentElement.clientWidth / scrollWidth;
 
     /*Вычисление значения left для ползунка*/
     this.divSlider.style.left = scrollLeft * scaleX + 'px';
@@ -122,7 +122,7 @@ xSlider.prototype.attachMouseDownHandler = function (HTMLElement) {
         }
 
         /*Масштаб по оси X*/
-        var scaleX = self.parent.clientWidth / scrollWidth;
+        var scaleX = self.divSlider.parentElement.clientWidth / scrollWidth;
 
         /*Запретить выделение текста*/
         document.body.classList.add('disable-select');
@@ -138,8 +138,8 @@ xSlider.prototype.attachMouseDownHandler = function (HTMLElement) {
             }
 
             /*Проверить правую позицию ползунка*/
-            if (self.divSlider.offsetLeft + self.divSlider.offsetWidth >= self.parent.offsetWidth) {
-                self.divSlider.style.left = self.parent.offsetWidth - self.divSlider.offsetWidth + 'px';
+            if (self.divSlider.offsetLeft + self.divSlider.offsetWidth >= self.divSlider.parentElement.offsetWidth) {
+                self.divSlider.style.left = self.divSlider.parentElement.offsetWidth - self.divSlider.offsetWidth + 'px';
             }
 
             /*Прокрутить страницу или элемент*/
@@ -194,6 +194,7 @@ xSlider.prototype.attachResizeHandler = function (HTMLElement) {
 
     /*Обработчик resize события*/
     this.resizeHandler = (function () {
+
         this.setLeftPositionByElementsScrollLeft(HTMLElement);
     }).bind(this);
 
