@@ -293,7 +293,6 @@ CustomScrollbarDocument.prototype.attachWheelHandler = function () {
 };
 
 
-
 /**
  * Прикрепить обработчик scroll события
  */
