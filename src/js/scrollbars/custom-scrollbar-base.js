@@ -1,7 +1,14 @@
+/**
+ * Базовый класс для всех полос прокрутки
+ * @constructor
+ */
 function CustomScrollbarBase() {
 }
 
-
+/**
+ * Запретить прокрутку элемента
+ * @param HTMLElement
+ */
 CustomScrollbarBase.prototype.disableOverflow = function (HTMLElement) {
 
     /*Запретить прокрутку элемента*/
@@ -12,7 +19,10 @@ CustomScrollbarBase.prototype.disableOverflow = function (HTMLElement) {
 };
 
 
-
+/**
+ * Разрешить прокрутку элемента
+ * @param HTMLElement
+ */
 CustomScrollbarBase.prototype.enableOverflow = function (HTMLElement) {
 
     /*Запретить прокрутку элемента*/
