@@ -67,6 +67,14 @@ function CustomScrollbar(HTMLElement) {
             cs.removeXScrollbar();
         },
 
+
+        /**
+         * Оповестить все пользовательские полосы прокрутки - перерисовать свое положение
+         */
+        notifyAllCustomScrollbars: function () {
+            cs.triggerResizeEvent();
+        },
+
         /**
          * Добавить CSS класс для вертикального ползунка.
          * @param className string. Название CSS класса.
