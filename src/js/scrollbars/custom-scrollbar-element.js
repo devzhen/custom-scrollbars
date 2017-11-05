@@ -1,3 +1,7 @@
+CustomScrollbarElement.prototype = Object.create(CustomScrollbarBase.prototype);
+CustomScrollbarElement.prototype.constructor = CustomScrollbarElement;
+
+
 /**
  * Пользовательские полосы прокрутки для html-элемента
  * @constructor
@@ -11,7 +15,17 @@ function CustomScrollbarElement(htmlElement) {
     this.element = htmlElement;
 
     /*Запретить прокрутку элемента*/
-    this.disableOverflow();
+    this.disableOverflow(this.element);
+
+    /*Генерация события resize - это нужно, чтобы все custom scrollbars перерисовали своё положение*/
+    try {
+        this.triggerResizeEvent();
+
+    } catch (e) {
+
+        this.enableOverflow(this.element);
+        return;
+    }
 
     /*Пользовательская вертикальная полоса прокрутки*/
     if (this.element.scrollHeight > this.element.clientHeight) {
@@ -47,20 +61,6 @@ function CustomScrollbarElement(htmlElement) {
  * @type {number}
  */
 CustomScrollbarElement.WHEEL_PIXEL_STEP = 100;
-
-
-/**
- * Запретить прокрутку элемента
- */
-CustomScrollbarElement.prototype.disableOverflow = function () {
-
-    /*Запретить прокрутку элемента*/
-    this.element.classList.add('disable-y-overflow');
-    this.element.classList.add('disable-x-overflow');
-
-    /*Убрать css св-во outline*/
-    this.element.classList.add('disable-outline');
-};
 
 
 /**
@@ -260,20 +260,6 @@ CustomScrollbarElement.prototype.attachResizeHandler = function () {
 
 
 /**
- * Открепить обработчик resize события
- */
-CustomScrollbarElement.prototype.detachResizeHandler = function () {
-
-    if (this.resizeHandler) {
-
-        window.removeEventListener('resize', this.resizeHandler);
-
-        this.resizeHandler = null;
-    }
-};
-
-
-/**
  * Прикрепить обработчик wheel события
  */
 CustomScrollbarElement.prototype.attachWheelHandler = function () {
@@ -347,35 +333,6 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
             e.returnValue = false;
         }
     }
-};
-
-
-/**
- * Открепить обработчик wheel события
- */
-CustomScrollbarElement.prototype.detachWheelHandler = function () {
-
-    if (this.wheelHandler) {
-
-        if (this.element.removeEventListener) {
-
-            if ('onwheel' in document) {
-                // IE9+, FF17+, Ch31+
-                this.element.removeEventListener("wheel", this.wheelHandler);
-            } else if ('onmousewheel' in document) {
-                // устаревший вариант события
-                this.element.removeEventListener("mousewheel", this.wheelHandler);
-            } else {
-                // Firefox < 17
-                this.element.removeEventListener("MozMousePixelScroll", this.wheelHandler);
-            }
-        } else { // IE8-
-            this.element.detachEvent("onmousewheel", this.wheelHandler);
-        }
-
-        this.wheelHandler = null;
-    }
-
 };
 
 

@@ -1,11 +1,15 @@
+CustomScrollbarDocument.prototype = Object.create(CustomScrollbarBase.prototype);
+CustomScrollbarDocument.prototype.constructor = CustomScrollbarDocument;
+
+
 /**
  * Пользовательские полосы прокрутки для страницы
  * @constructor
  */
 function CustomScrollbarDocument() {
 
-    /*Запретить прокрутку*/
-    this.disableOverflow();
+    /*Запретить прокрутку страницы*/
+    this.disableOverflow(document.documentElement);
 
     /*Генерация события resize - это нужно, чтобы все custom scrollbars перерисовали своё положение*/
     try {
@@ -13,7 +17,7 @@ function CustomScrollbarDocument() {
 
     } catch (e) {
 
-        this.enableOverflow();
+        this.enableOverflow(document.documentElement);
         return;
     }
 
@@ -69,31 +73,6 @@ CustomScrollbarDocument.WHEEL_PIXEL_STEP = 100;
  * @type {boolean}
  */
 CustomScrollbarDocument.IS_SOMEBODY_SCROLLED_NOW = false;
-
-
-/**
- * Запрет прокрутки страницы
- */
-CustomScrollbarDocument.prototype.disableOverflow = function () {
-
-    /*Запретить прокрутку элемента*/
-    // document.body.classList.add('disable-y-overflow');
-    // document.body.classList.add('disable-x-overflow');
-
-    /*Запретить прокрутку элемента*/
-    document.documentElement.classList.add('disable-overflow');
-};
-
-
-/**
- * Разрешить прокрутку страницы
- */
-CustomScrollbarDocument.prototype.enableOverflow = function () {
-
-    /*Запретить прокрутку элемента*/
-    document.body.classList.remove('disable-y-overflow');
-    document.body.classList.remove('disable-x-overflow');
-};
 
 
 /**
@@ -226,55 +205,6 @@ CustomScrollbarDocument.prototype.attachResizeHandler = function () {
 
 
 /**
- * Открепить обработчик resize события
- */
-CustomScrollbarDocument.prototype.detachResizeHandler = function () {
-
-    if (this.resizeHandler) {
-
-        window.removeEventListener('resize', this.resizeHandler);
-
-        this.resizeHandler = null;
-    }
-
-};
-
-
-/**
- * Генерация resize события. Метод нужен чтобы все полосы прокрутки перерисовали свое положение
- */
-CustomScrollbarDocument.prototype.triggerResizeEvent = function () {
-
-    try {
-
-        var event = new Event("resize", {bubbles: true, cancelable: true});
-
-        document.dispatchEvent(event);
-
-    } catch (e) {
-
-        /*IE9+*/
-        if (document.createEvent) {
-
-            event = document.createEvent("Event");
-
-            event.initEvent("resize", true, true);
-
-            document.dispatchEvent(event);
-
-        } else if (document.createEventObject) {/*IE8-*/
-
-            event = document.createEventObject();
-
-            document.fireEvent("onresize", event)
-        }
-
-    }
-
-};
-
-
-/**
  * Прикрепить обработчик wheel события
  */
 CustomScrollbarDocument.prototype.attachWheelHandler = function () {
@@ -362,33 +292,6 @@ CustomScrollbarDocument.prototype.attachWheelHandler = function () {
     }
 };
 
-
-/**
- * Открепить обработчик wheel события
- */
-CustomScrollbarDocument.prototype.detachWheelHandler = function () {
-
-    if (this.wheelHandler) {
-
-        if (this.element.removeEventListener) {
-
-            if ('onwheel' in document) {
-                // IE9+, FF17+, Ch31+
-                this.element.removeEventListener("wheel", this.wheelHandler);
-            } else if ('onmousewheel' in document) {
-                // устаревший вариант события
-                this.element.removeEventListener("mousewheel", this.wheelHandler);
-            } else {
-                // Firefox < 17
-                this.element.removeEventListener("MozMousePixelScroll", this.wheelHandler);
-            }
-        } else { // IE8-
-            this.element.detachEvent("onmousewheel", this.wheelHandler);
-        }
-
-        this.wheelHandler = null;
-    }
-};
 
 
 /**
