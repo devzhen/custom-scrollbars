@@ -57,18 +57,9 @@ CustomScrollbarBase.prototype.triggerResizeEvent = function () {
 
 
 /**
- * Прикрепить обработчик resize события
- */
-CustomScrollbarDocument.prototype.attachResizeHandler = function () {
-
-    window.addEventListener('resize', this.resizeHandler);
-};
-
-
-/**
  * Открепить обработчик resize события
  */
-CustomScrollbarDocument.prototype.detachResizeHandler = function () {
+CustomScrollbarBase.prototype.detachResizeHandler = function () {
 
     if (this.resizeHandler) {
 
@@ -83,7 +74,7 @@ CustomScrollbarDocument.prototype.detachResizeHandler = function () {
 /**
  * Открепить обработчик wheel события
  */
-CustomScrollbarElement.prototype.detachWheelHandler = function () {
+CustomScrollbarBase.prototype.detachWheelHandler = function () {
 
     if (this.wheelHandler) {
 
