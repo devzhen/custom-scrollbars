@@ -67,14 +67,6 @@ function CustomScrollbar(HTMLElement) {
             cs.removeXScrollbar();
         },
 
-
-        /**
-         * Оповестить все пользовательские полосы прокрутки - перерисовать свое положение
-         */
-        notifyAllCustomScrollbars: function () {
-            cs.triggerResizeEvent();
-        },
-
         /**
          * Добавить CSS класс для вертикального ползунка.
          * @param className string. Название CSS класса.
@@ -196,6 +188,39 @@ function CustomScrollbar(HTMLElement) {
 
             /*Удалить атрибут id для вертикального ползунка*/
             cs.xSlider.divSlider.removeAttribute('id');
-        },
+        }
     };
 }
+
+
+/**
+ * Оповестить все пользовательские полосы прокрутки - перерисовать свое положение
+ */
+CustomScrollbar.notifyAllCustomScrollbars = function () {
+
+    try {
+
+        var event = new Event("resize", {bubbles: true, cancelable: true});
+
+        document.dispatchEvent(event);
+
+    } catch (e) {
+
+        /*IE9+*/
+        if (document.createEvent) {
+
+            event = document.createEvent("Event");
+
+            event.initEvent("resize", true, true);
+
+            document.dispatchEvent(event);
+
+        } else if (document.createEventObject) {/*IE8-*/
+
+            event = document.createEventObject();
+
+            document.fireEvent("onresize", event)
+        }
+
+    }
+};
