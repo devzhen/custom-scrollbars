@@ -1,0 +1,94 @@
+/************************************************
+Custom Scrollbars
+*************************************************/
+
+.disable-y-overflow {
+    overflow-y: hidden !important;
+}
+
+.disable-x-overflow {
+    overflow-x: hidden !important;
+}
+
+.disable-overflow {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    -ms-overflow-style: none;
+}
+
+.disable-outline {
+    outline: none;
+}
+
+.disable-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
+}
+
+.custom-wrapper {
+    position: relative;
+}
+
+.custom-y-rail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 16px;
+}
+
+.custom-y-rail-document {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 16px;
+}
+
+.custom-x-rail {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 16px;
+    width: 100%;
+}
+
+.custom-x-rail-document {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 16px;
+    width: 100%;
+}
+
+.custom-y-slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 16px;
+    background-color: red;
+    opacity: 0.5;
+    cursor: pointer;
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+.custom-x-slider {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 16px;
+    background-color: red;
+    opacity: 0.5;
+    cursor: pointer;
+    border-radius: 20px;
+    z-index: 1000;
+}
