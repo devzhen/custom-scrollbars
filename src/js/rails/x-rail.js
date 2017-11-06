@@ -53,7 +53,7 @@ xRail.prototype.correctWidth = function (value) {
 
     if (typeof value === 'number') {
 
-        this.divRail.style.width = this.element.offsetWidth;
+        this.divRail.style.width = '100%';
         this.divRail.style.width = this.divRail.offsetWidth - value + 'px';
     }
 };
