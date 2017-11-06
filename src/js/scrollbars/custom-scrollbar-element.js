@@ -40,9 +40,6 @@ function CustomScrollbarElement(htmlElement) {
     /*Прикрепить обработчик scroll события*/
     this.attachScrollHandler();
 
-    /*Прикрепить обработчик mousedown события*/
-    this.attachMouseDownHandler();
-
     /*Прикрепить обработчик wheel события*/
     this.attachWheelHandler();
 
@@ -335,33 +332,6 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
         } else {
             e.returnValue = false;
         }
-    }
-};
-
-
-/**
- *  Прикрепить обработчик mousedowm события
- */
-CustomScrollbarElement.prototype.attachMouseDownHandler = function () {
-
-    var self = this;
-
-    self.element.addEventListener('mousedown', mouseDownHandler);
-
-    function mouseDownHandler() {
-
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
-    }
-
-    function mouseMoveHandler() {
-        self.triggerResizeEvent();
-    }
-
-    function mouseUpHandler() {
-
-        document.removeEventListener('mousemove', mouseMoveHandler);
-        document.removeEventListener('mouseup', mouseUpHandler);
     }
 };
 

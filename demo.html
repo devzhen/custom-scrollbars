@@ -18,6 +18,10 @@
     <script src="src/js/scrollbars/custom-scrollbar-document.js"></script>
     <script src="src/js/scrollbars/custom-scrollbar.js"></script>
 
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery.nicescroll/dist/jquery.nicescroll.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+
 
     <style>
         html, body {
@@ -204,8 +208,70 @@
 
 <script>
 
+    function getCoords(HTMLElement) {
+
+        var box = HTMLElement.getBoundingClientRect();
+
+        var body = document.body;
+        var docEl = document.documentElement;
+
+        var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+        var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+        var clientTop = docEl.clientTop || body.clientTop || 0;
+        var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+        var top = box.top + scrollTop - clientTop;
+        var left = box.left + scrollLeft - clientLeft;
+
+        return {
+            top: top,
+            left: left
+        };
+    }
+
+    function makeDraggable(HTMLElement) {
+
+        HTMLElement.style.cursor = 'pointer';
+
+        HTMLElement.addEventListener('mousedown', function (e) {
+
+            /*Координаты горизонтального ползунка*/
+            var coords = getCoords(HTMLElement);
+
+            /*Смещение курсора*/
+            var shiftX = e.pageX - coords.left;
+            var shiftY = e.pageY - coords.top;
+
+            HTMLElement.style.position = 'absolute';
+
+            document.body.appendChild(HTMLElement);
+
+            document.addEventListener('mousemove', mouseMoveHandler);
+
+            document.addEventListener('mouseup', mouseUpHandler);
+
+            function mouseMoveHandler(e) {
+                HTMLElement.style.left = e.pageX - shiftX + 'px';
+                HTMLElement.style.top = e.pageY - shiftY + 'px';
+            }
+
+            function mouseUpHandler() {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            }
+        });
+    }
+</script>
+
+<script>
+
     var textarea1 = document.getElementById('test1');
-    var cs1 = new CustomScrollbar(textarea1);
+//    var cs1 = new CustomScrollbar(textarea1);
+    $(document).ready(function () {
+        $(textarea1).mCustomScrollbar();
+    });
+    makeDraggable(textarea1);
 
     var textarea2 = document.getElementById('test2');
     var cs2 = new CustomScrollbar(textarea2);
@@ -238,7 +304,6 @@
     var cs6 = new CustomScrollbar(textarea5);
 
     var cs7 = new CustomScrollbar(document.body);
-
 </script>
 </body>
 </html>
