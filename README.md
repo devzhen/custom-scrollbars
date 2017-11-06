@@ -1,1 +1,1 @@
-custom scrollbars
+Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
