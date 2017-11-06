@@ -126,8 +126,10 @@ ySlider.prototype.attachMouseDownHandler = function (HTMLElement) {
         /*Запретить выделение текста*/
         document.body.classList.add('disable-select');
 
-        document.onmousemove = function (e) {
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
 
+        function mouseMoveHandler(e) {
             /*Если html-элемент удален*/
             if (HTMLElement.offsetWidth === 0 && HTMLElement.offsetHeight === 0) {
                 return;
@@ -156,20 +158,17 @@ ySlider.prototype.attachMouseDownHandler = function (HTMLElement) {
             } else {
 
                 /*Вычисление значения scrollTop для элемента*/
-               HTMLElement.scrollTop = self.divSlider.offsetTop / scaleY;
+                HTMLElement.scrollTop = self.divSlider.offsetTop / scaleY;
             }
+        }
 
-
-        };
-
-        document.onmouseup = function (e) {
-
-            document.onmousemove = null;
-            document.onmouseup = null;
+        function mouseUpHandler() {
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
 
             /*Снять запрет на выделение текста*/
             document.body.classList.remove('disable-select');
-        };
+        }
 
     }).bind(this);
 

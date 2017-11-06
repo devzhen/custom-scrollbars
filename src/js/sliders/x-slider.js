@@ -127,7 +127,10 @@ xSlider.prototype.attachMouseDownHandler = function (HTMLElement) {
         /*Запретить выделение текста*/
         document.body.classList.add('disable-select');
 
-        document.onmousemove = function (e) {
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+
+        function mouseMoveHandler(e) {
 
             /*Переместить ползунок*/
             self.divSlider.style.left = e.pageX - shiftX - self.getCoords(self.divSlider.parentElement).left + 'px';
@@ -153,17 +156,15 @@ xSlider.prototype.attachMouseDownHandler = function (HTMLElement) {
                 /*Вычисление значения scrollLeft для элемента*/
                 HTMLElement.scrollLeft = self.divSlider.offsetLeft / scaleX;
             }
+        }
 
-        };
-
-        document.onmouseup = function (e) {
-
-            document.onmousemove = null;
-            document.onmouseup = null;
+        function mouseUpHandler() {
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
 
             /*Снять запрет на выделение текста*/
             document.body.classList.remove('disable-select');
-        };
+        }
 
     }).bind(this);
 

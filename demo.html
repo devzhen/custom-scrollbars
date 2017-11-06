@@ -254,6 +254,8 @@
             function mouseMoveHandler(e) {
                 HTMLElement.style.left = e.pageX - shiftX + 'px';
                 HTMLElement.style.top = e.pageY - shiftY + 'px';
+
+                CustomScrollbar.notifyAllCustomScrollbars();
             }
 
             function mouseUpHandler() {
@@ -267,10 +269,8 @@
 <script>
 
     var textarea1 = document.getElementById('test1');
-//    var cs1 = new CustomScrollbar(textarea1);
-    $(document).ready(function () {
-        $(textarea1).mCustomScrollbar();
-    });
+        var cs1 = new CustomScrollbar(textarea1);
+
     makeDraggable(textarea1);
 
     var textarea2 = document.getElementById('test2');
