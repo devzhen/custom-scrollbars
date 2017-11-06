@@ -1297,7 +1297,17 @@
 
         if (typeof value === 'number') {
 
-            this.divRail.style.width = '100%';
+            if (this.element === document ||
+                this.element === document.documentElement ||
+                this.element === document.body) {
+
+                this.divRail.style.width = '100%';
+
+            } else {
+
+                this.divRail.style.width = this.element.offsetWidth + 'px';
+            }
+
             this.divRail.style.width = this.divRail.offsetWidth - value + 'px';
         }
     };
