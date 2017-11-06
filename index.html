@@ -232,7 +232,7 @@
 
     function makeDraggable(HTMLElement) {
 
-        HTMLElement.style.cursor = 'pointer';
+        HTMLElement.style.cursor = 'move';
 
         HTMLElement.addEventListener('mousedown', function (e) {
 
@@ -245,7 +245,7 @@
 
             HTMLElement.style.position = 'absolute';
 
-            document.body.appendChild(HTMLElement);
+//            document.body.appendChild(HTMLElement);
 
             document.addEventListener('mousemove', mouseMoveHandler);
 
@@ -269,7 +269,7 @@
 <script>
 
     var textarea1 = document.getElementById('test1');
-        var cs1 = new CustomScrollbar(textarea1);
+    var cs1 = new CustomScrollbar(textarea1);
 
     makeDraggable(textarea1);
 
