@@ -40,6 +40,7 @@ function CustomScrollbarElement(htmlElement) {
     /*Прикрепить обработчик scroll события*/
     this.attachScrollHandler();
 
+    /*Прикрепить обработчик mousedown события*/
     this.attachMouseDownHandler();
 
     /*Прикрепить обработчик wheel события*/
@@ -339,7 +340,7 @@ CustomScrollbarElement.prototype.attachWheelHandler = function () {
 
 
 /**
- *
+ *  Прикрепить обработчик mousedowm события
  */
 CustomScrollbarElement.prototype.attachMouseDownHandler = function () {
 
@@ -363,6 +364,7 @@ CustomScrollbarElement.prototype.attachMouseDownHandler = function () {
         document.removeEventListener('mouseup', mouseUpHandler);
     }
 };
+
 
 /**
  * Проверка существования элемента
