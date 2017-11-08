@@ -1346,8 +1346,10 @@
             /*Определение обработчика resize события*/
             this.resizeHandler = function () {
 
-                this.divRail.style.top = this.getCoords(this.element).top + 'px';
-                this.divRail.style.left = this.getCoords(this.element).right - this.divRail.offsetWidth + 'px';
+                var elem_coords = this.getCoords(this.element);
+
+                this.divRail.style.top = elem_coords.top + 'px';
+                this.divRail.style.left = elem_coords.right - this.divRail.offsetWidth + 'px';
                 this.divRail.style.height = this.element.offsetHeight + 'px';
 
             }.bind(this);
