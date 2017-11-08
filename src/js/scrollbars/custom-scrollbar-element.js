@@ -68,7 +68,8 @@ CustomScrollbarElement.WHEEL_PIXEL_STEP = 100;
  */
 CustomScrollbarElement.prototype.createYScrollbar = function () {
 
-    if (this.ySlider) {
+    /*Если установлена ползовательская полоса прокрутки или нет вертикальной прокрутки вообще*/
+    if (this.ySlider || this.element.scrollHeight <= this.element.clientHeight) {
         return;
     }
 
@@ -118,7 +119,7 @@ CustomScrollbarElement.prototype.removeYScrollbar = function () {
  */
 CustomScrollbarElement.prototype.createXScrollbar = function () {
 
-    /*Если установлена ползовательская полоса прокрутки или нет прокрутки вообще*/
+    /*Если установлена ползовательская полоса прокрутки или нет горизонтальной прокрутки вообще*/
     if (this.xSlider || this.element.scrollWidth <= this.element.clientWidth) {
         return;
     }
