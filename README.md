@@ -1,6 +1,6 @@
 Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
 
-####How to use it
+**How to use it**
 
 * Include *dg-custom-scrollbar.css* in the head tag your HTML document:
     ```
@@ -25,14 +25,19 @@ Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
     
     * `cs.createYScrollbar()`       - creates | removes a custom vertical scroll bar.<br>
       `cs.removeYScrollbar()`
+      
     * `cs.createXScrollbar()`       - creates | removes a custom horizontal scroll bar.<br> 
       `cs.removeXScrollbar()`
+      
     * `cs.setCssClassForVerticalSlider()`       - sets | removes the css class for the vertical slider.<br>
       `cs.removeCssClassForVerticalSlider()`
+      
     * `cs.setCssClassForHorizontalSlider()`     - sets | removes the css class for the horizontal slider.<br>
       `cs.removeCssClassForHorizontalSlider()`
+      
     * `cs.setIdForVerticalSlider()`     - sets | removes the id attribute for the vertical slider.<br>
       `cs.removeIdForVerticalSlider()`
+      
     * `cs.setIdForHorizontalSlider()`   - sets | removes the id attribute for the horizontal slider.<br>
       `cs.removeIdForHorizontalSlider()`
     
