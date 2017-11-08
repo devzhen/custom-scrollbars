@@ -118,7 +118,8 @@ CustomScrollbarElement.prototype.removeYScrollbar = function () {
  */
 CustomScrollbarElement.prototype.createXScrollbar = function () {
 
-    if (this.xSlider) {
+    /*Если установлена ползовательская полоса прокрутки или нет прокрутки вообще*/
+    if (this.xSlider || this.element.scrollWidth <= this.element.clientWidth) {
         return;
     }
 
