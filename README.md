@@ -1,12 +1,12 @@
 Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
 
-**How to use it**
+****How to use it****
 
-* Include *dg-custom-scrollbar.css* in the head tag your HTML document:
+* Include *dg-custom-scrollbar.min.css* in the head tag your HTML document:
     ```HTML
     <link rel="stylesheet" href="/path/to/dist/css/dg-custom-scrollbar.css" />
     ```
-* Include *dg-custom-scrollbar.js* in your HTML document:
+* Include *dg-custom-scrollbar.min.js* in your HTML document:
     ``` HTML
     <script src="/path/to/dist/js/dg-custom-scrollbars.js"></script>
     ```
