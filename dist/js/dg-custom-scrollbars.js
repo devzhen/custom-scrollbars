@@ -192,8 +192,8 @@
                 cs.xSlider.divSlider.removeAttribute('id');
             }
         };
-
     };
+
 
     /**
      * Оповестить все пользовательские полосы прокрутки - перерисовать свое положение
@@ -227,11 +227,6 @@
         }
     };
 
-
-
-    /*************************************************************************************
-     * CustomScrollbarBase
-     *************************************************************************************/
     /**
      * Базовый класс для всех полос прокрутки
      * @constructor
@@ -342,15 +337,6 @@
         }
 
     };
-
-
-
-
-
-
-    /*************************************************************************************
-     * CustomScrollbarDocument
-     *************************************************************************************/
     CustomScrollbarDocument.prototype = Object.create(CustomScrollbarBase.prototype);
     CustomScrollbarDocument.prototype.constructor = CustomScrollbarDocument;
 
@@ -726,14 +712,6 @@
             this.secondScrollHandler = null;
         }
     };
-
-
-
-
-
-    /*************************************************************************************
-     * CustomScrollbarElement
-     *************************************************************************************/
     CustomScrollbarElement.prototype = Object.create(CustomScrollbarBase.prototype);
     CustomScrollbarElement.prototype.constructor = CustomScrollbarElement;
 
@@ -804,7 +782,8 @@
      */
     CustomScrollbarElement.prototype.createYScrollbar = function () {
 
-        if (this.ySlider) {
+        /*Если установлена ползовательская полоса прокрутки или нет вертикальной прокрутки вообще*/
+        if (this.ySlider || this.element.scrollHeight <= this.element.clientHeight) {
             return;
         }
 
@@ -854,7 +833,8 @@
      */
     CustomScrollbarElement.prototype.createXScrollbar = function () {
 
-        if (this.xSlider) {
+        /*Если установлена ползовательская полоса прокрутки или нет горизонтальной прокрутки вообще*/
+        if (this.xSlider || this.element.scrollWidth <= this.element.clientWidth) {
             return;
         }
 
@@ -1101,11 +1081,6 @@
     };
 
 
-
-
-    /*************************************************************************************
-     * Rail
-     *************************************************************************************/
     /**
      * Направляющая для ползунка прокрутки
      * @param htmlElement HTMLElement. Родительский элемент для направляющей
@@ -1235,13 +1210,6 @@
     function clickHandler(event) {
         event.preventDefault();
     }
-
-
-
-
-    /*************************************************************************************
-     * xRail
-     *************************************************************************************/
     xRail.prototype = Object.create(Rail.prototype);
     xRail.prototype.constructor = xRail;
 
@@ -1313,15 +1281,6 @@
             this.divRail.style.width = this.divRail.offsetWidth - value + 'px';
         }
     };
-
-
-
-
-
-
-    /*************************************************************************************
-     * yRail
-     *************************************************************************************/
     yRail.prototype = Object.create(Rail.prototype);
     yRail.prototype.constructor = yRail;
 
@@ -1363,14 +1322,6 @@
             this.attachResizeHandler();
         }
     }
-
-
-
-
-
-    /*************************************************************************************
-     * Slider
-     *************************************************************************************/
     /**
      * Ползунок прокрутки
      * @param sliderParent HTMLElement. Родительский элемент для ползунка
@@ -1470,14 +1421,6 @@
 
         this.clickHandler = null;
     };
-
-
-
-
-
-    /*************************************************************************************
-     * xSlider
-     *************************************************************************************/
     xSlider.prototype = Object.create(Slider.prototype);
     xSlider.prototype.constructor = xSlider;
 
@@ -1692,13 +1635,6 @@
 
         this.resizeHandler = null;
     };
-
-
-
-
-    /*************************************************************************************
-     * ySlider
-     *************************************************************************************/
     ySlider.prototype = Object.create(Slider.prototype);
     ySlider.prototype.constructor = ySlider;
 
@@ -1914,6 +1850,7 @@
 
         this.resizeHandler = null;
     };
+
 
 
 
