@@ -1,0 +1,27 @@
+{
+  "name": "dg-custom-scrollbars",
+  "version": "3.0.3",
+  "description": "Custom scrollbars using pure javascript",
+  "main": [
+    ".dist/css/dg-custom-scrollbar.min.css",
+    ".dist/js/dg-custom-scrollbars.min.js"
+  ],
+  "authors": [
+    "Yevgeny <https://github.com/devzhen>"
+  ],
+  "homepage": "https://devzhen.github.io/dg-custom-scrollbars/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "demo.html",
+    "demo2.html",
+    "gulpfile.js",
+    "package.json",
+    "README.md",
+    ".gitignore",
+    "bower.json"
+  ]
+}
