@@ -1,10 +1,10 @@
 {
   "name": "dg-custom-scrollbars",
-  "version": "3.0.3",
+  "version": "1.0.0",
   "description": "Custom scrollbars using pure javascript",
   "main": [
-    ".dist/css/dg-custom-scrollbar.min.css",
-    ".dist/js/dg-custom-scrollbars.min.js"
+    ".dist/css/dg-custom-scrollbar.css",
+    ".dist/js/dg-custom-scrollbars.js"
   ],
   "authors": [
     "Yevgeny <https://github.com/devzhen>"
