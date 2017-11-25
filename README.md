@@ -1,5 +1,11 @@
 Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
 
+****Installation****
+
+* Bower: ```bower install dgCustomScrollbars```
+
+<br>
+
 ****How to use it****
 
 * Include *'dg-custom-scrollbar.min.css'* in the head tag your HTML document:
