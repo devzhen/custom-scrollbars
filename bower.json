@@ -6,6 +6,11 @@
     ".dist/css/dg-custom-scrollbar.css",
     ".dist/js/dg-custom-scrollbars.js"
   ],
+  "keywords": [
+    "javascript",
+    "custom scrollbar",
+    "scrollbar"
+  ],
   "authors": [
     "Yevgeny <https://github.com/devzhen>"
   ],
