@@ -2,7 +2,7 @@ Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
 
 ****Installation****
 
-* Bower: ```bower install dgCustomScrollbars```
+* Bower: ```bower install dg-custom-scrollbar```
 
 <br>
 
@@ -49,4 +49,4 @@ Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
     
     also `CustomScrollbar` provides a static method:
     
-    * `CustomScrollbar.notifyAllCustomScrollbars()` - this is a static method that notifies all scrollbars to update their positions.
+    * `CustomScrollbar. - this is a static method that notifies all scrollbars to update their positions.notifyAllCustomScrollbars()
