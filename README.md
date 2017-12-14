@@ -2,6 +2,7 @@ Custom scrollbars demo - https://devzhen.github.io/dg-custom-scrollbars
 
 ****Installation****
 
+* npm: ```npm install dg-custom-scrollbar```
 * Bower: ```bower install dg-custom-scrollbar```
 
 <br>
