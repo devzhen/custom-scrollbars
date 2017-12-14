@@ -11,6 +11,7 @@
     "custom scrollbar",
     "scrollbar"
   ],
+  "license" : "MIT",
   "authors": [
     "Yevgeny <https://github.com/devzhen>"
   ],

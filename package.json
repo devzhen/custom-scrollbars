@@ -1,7 +1,20 @@
 {
   "name": "dg-custom-scrollbars",
   "version": "1.0.0",
-  "description": "Custom scrollbars",
+  "description": "Custom scrollbars using pure javascript",
+  "keywords": [
+    "javascript",
+    "custom scrollbar",
+    "scrollbar",
+    "scrollbars",
+  ],
+  "license" : "MIT",
+  "author": "dezhen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devzhen.git"
+  },
+  "homepage": "https://devzhen.github.io/dg-custom-scrollbars/",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
