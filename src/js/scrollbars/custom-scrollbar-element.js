@@ -14,6 +14,12 @@ function CustomScrollbarElement(htmlElement) {
 
     this.element = htmlElement;
 
+    /*Классы, кот указываются при вызове метода 'setCssClassForVerticalSlider' для вертикального ползунка*/
+    this.yUserDefinedClasses = [];
+
+    /*Классы, кот указываются при вызове метода 'setCssClassForHorizontalSlider' для горизонтального ползунка*/
+    this.xUserDefinedClasses = [];
+
     /*Запретить прокрутку элемента*/
     this.disableOverflow(this.element);
 
@@ -81,6 +87,15 @@ CustomScrollbarElement.prototype.createYScrollbar = function () {
     this.ySlider.attachClickHandler();
     this.ySlider.attachMouseDownHandler(this.element);
 
+    /*Добавление классов для вертикального ползунка, если они были определены пользователем*/
+    if(this.yUserDefinedClasses.length !== 0) {
+        for (var i = 0; i < this.yUserDefinedClasses.length; i++) {
+
+            this.ySlider.divSlider.classList.add(this.yUserDefinedClasses[i]);
+
+        }
+    }
+
     /*Если существует горизонтальная полоса прокрутки - подкорректировать её ширину*/
     if (this.xSlider && this.xRail) {
         this.xRail.correctWidth(this.yRail.getWidth());
@@ -138,6 +153,15 @@ CustomScrollbarElement.prototype.createXScrollbar = function () {
     this.xSlider.attachResizeHandler(this.element);
     this.xSlider.attachClickHandler();
     this.xSlider.attachMouseDownHandler(this.element);
+
+    /*Добавление классов для горизонтального ползунка, если они были определены пользователем*/
+    if(this.xUserDefinedClasses.length !== 0) {
+        for (var i = 0; i < this.xUserDefinedClasses.length; i++) {
+
+            this.xSlider.divSlider.classList.add(this.xUserDefinedClasses[i]);
+
+        }
+    }
 };
 
 

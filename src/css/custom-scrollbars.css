@@ -68,16 +68,12 @@ Custom Scrollbars
 }
 
 .custom-y-slider {
-    position: absolute;
-    top: 0;
-    right: 0;
     height: 100%;
     width: 16px;
     background-color: red;
     opacity: 0.5;
     cursor: pointer;
     border-radius: 20px;
-    z-index: 1000;
 }
 
 .custom-x-slider {

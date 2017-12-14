@@ -12,6 +12,12 @@ function ySlider() {
     /*Создать div вертикального ползунка*/
     this.create();
 
+    this.divSlider.style.position = 'absolute';
+    this.divSlider.style.top = 0;
+    this.divSlider.style.right = 0;
+    this.divSlider.style.height = '100%';
+    this.divSlider.style.zIndex = 1000;
+
     this.divSlider.classList.add('custom-y-slider');
 }
 

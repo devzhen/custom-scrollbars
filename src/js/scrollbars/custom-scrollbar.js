@@ -74,13 +74,24 @@ function CustomScrollbar(HTMLElement) {
         setCssClassForVerticalSlider: function (className) {
 
             /*Проверка*/
-            if (!className || typeof className !== "string" || !cs.ySlider) {
+            if (!className || typeof className !== "string") {
                 return;
             }
 
-            /*Добавить CSS класс для ползунка*/
-            cs.ySlider.divSlider.classList.add(className);
+            /*Если существует ползунок вертикальной прокрутки*/
+            if (cs.ySlider) {
+
+                /*Добавить CSS класс для ползунка*/
+                cs.ySlider.divSlider.classList.add(className);
+
+            } else {
+
+                /*Класс будет добавлен при создании ползунка*/
+                cs.yUserDefinedClasses.push(className);
+            }
+
         },
+
 
         /**
          * Удалить CSS класс для вертикального ползунка.
@@ -99,6 +110,7 @@ function CustomScrollbar(HTMLElement) {
             }
         },
 
+
         /**
          * Добавить CSS класс для горизонтального ползунка.
          * @param className string. Название CSS класса.
@@ -106,13 +118,25 @@ function CustomScrollbar(HTMLElement) {
         setCssClassForHorizontalSlider: function (className) {
 
             /*Проверка*/
-            if (!className || typeof className !== "string" || !cs.xSlider) {
+            if (!className || typeof className !== "string") {
                 return;
             }
 
-            /*Добавить CSS класс для ползунка*/
-            cs.ySlider.divSlider.classList.add(className);
+            /*Если существует гоизонтальный позунок*/
+            if (cs.xSlider) {
+
+                /*Добавить CSS класс для ползунка*/
+                cs.xSlider.divSlider.classList.add(className);
+
+            } else {
+
+                /*Класс будет добавлен при создании ползунка*/
+                cs.xUserDefinedClasses.push(className);
+            }
+
+
         },
+
 
         /**
          * Удалить CSS класс для горизонтального ползунка.
@@ -130,6 +154,7 @@ function CustomScrollbar(HTMLElement) {
                 cs.xSlider.divSlider.classList.remove(className)
             }
         },
+
 
         /**
          * Добавить атрибут id для вертикального ползунка.
@@ -161,6 +186,7 @@ function CustomScrollbar(HTMLElement) {
             cs.ySlider.divSlider.removeAttribute('id');
         },
 
+
         /**
          * Добавить атрибут id для горизонтального ползунка.
          * @param id string. Имя атрибута id.
@@ -175,6 +201,7 @@ function CustomScrollbar(HTMLElement) {
             /*Добавить атрибут id для горизонтального ползунка*/
             cs.xSlider.divSlider.id = id;
         },
+
 
         /**
          * Удалить атрибут id для горизонтального ползунка.
